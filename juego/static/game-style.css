@@ -1,0 +1,18 @@
+html, body {
+	height: 100%;
+}
+
+.container {
+	height: 90vh;
+	background-color: pink;
+}
+
+.game-item {
+	padding: 2% 0;
+}
+
+@media screen and (max-width: 812px) {
+	.list-group-horizontal-md {
+		flex-direction: column;
+	}
+}

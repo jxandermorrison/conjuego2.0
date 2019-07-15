@@ -1,20 +1,32 @@
 {% extends "base.html" %}
 
+{% block head %}
+<link rel="stylesheet" href="{{ url_for("static", filename="game-style.css") }}">
+{% endblock %}
+
 {% block navbar %}
 {% endblock %}
 
 {% block content %}
-	<ul class="list-group list-group-horizontal-md">
-		<a href="#" class="list-group-item list-group-item-action">{{ group.subject }}</a>
-		<a href="#" class="list-group-item list-group-item-action">{{ group.verb }}</a>
-		<a href="#" class="list-group-item list-group-item-action">{{ group.tense }}</a>
-		<a href="#" class="list-group-item list-group-item-action">{{ group.mood }}</a>
-	</ul>
-	<p></p>
-	<div class="input-group mb-3">
-	  <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
-	  <div class="input-group-append">
-		<button class="btn btn-primary" type="button" id="button-addon2">Button</button>
-	  </div>
+
+
+<div class="container d-flex align-items-center">
+	<div class="d-flex flex-column w-100">
+			<ul class="list-group list-group-horizontal-md game-item">
+				<a href="#" class="list-group-item list-group-item-action">{{ group.subject }}</a>
+				<a href="#" class="list-group-item list-group-item-action">{{ group.verb }}</a>
+				<a href="#" class="list-group-item list-group-item-action">{{ group.tense }}</a>
+				<a href="#" class="list-group-item list-group-item-action">{{ group.mood }}</a>
+			</ul>
+			<div class="input-group mb-3 game-item">
+				<input type="text" class="form-control" aria-describedby="button-addon2">
+					<div class="input-group-append">
+						<button class="btn btn-primary" type="button" id="button-addon2">Submit</button>
+					</div>
+			</div>
+	</div>
 </div>
+
+
+
 {% endblock %}

@@ -1,20 +1,11 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0">
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" href="{{ url_for("static", filename="style.css") }}">
 		<link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Quicksand&display=swap" rel="stylesheet">
-
-		<!-- Clean up -->
-<style>
-	h3, h4, h5, h6, p, a {
-		font-family: "Quicksand", sans-serif;
-	}
-	h1, h2, #nameBrand {
-		font-family: "Press Start 2P", cursive;
-	}
-		<!-- -->
-</style>
-		
+		{% block head %}{% endblock %}
 	</head>
 	<body>
 		<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
