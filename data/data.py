@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 import pandas as pd
 
-client = MongoClient()
+client = MongoClient("mongodb:// REPLACE")
 
 col = client["verbs"]["verbs"]
 
