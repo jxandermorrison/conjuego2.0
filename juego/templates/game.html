@@ -26,10 +26,10 @@
 	<div class="d-flex align-items-center w-100" id="game-container">
 		<div class="d-flex flex-column w-100">
 			<ul class="list-group list-group-horizontal-md game-item">
-				<a href="#" class="list-group-item list-group-item-action">{{ group.subject }}</a>
-				<a href="#" class="list-group-item list-group-item-action">{{ group.verb }}</a>
-				<a href="#" class="list-group-item list-group-item-action">{{ group.tense }}</a>
-				<a href="#" class="list-group-item list-group-item-action">{{ group.mood }}</a>
+				<a href="#" class="list-group-item list-group-item-action"><span class="d-block game-label">Subject</span>{{ group.subject }}</a>
+				<a href="#" class="list-group-item list-group-item-action"><span class="d-block game-label">Infinitive</span>{{ group.infinitive }}</a>
+				<a href="#" class="list-group-item list-group-item-action"><span class="d-block game-label">Mood</span>{{ group.en_mood }}</a>
+				<a href="#" class="list-group-item list-group-item-action"><span class="d-block game-label">Tense</span>{{ group.en_tense }}</a>
 			</ul>
 			<div class="input-group mb-3 game-item">
 				<input type="text" class="form-control" aria-describedby="button-addon2">
@@ -37,6 +37,18 @@
 						<button class="btn btn-primary" type="button" id="button-addon2">Submit</button>
 					</div>
 			</div>
+				<ul class="list-group text-center">
+					<li class="list-group-item list-group-item-success">{{ group.answer }}</li>
+					{% if group.translation %}
+						<li class="list-group-item">{{ group.translation }}</li>
+					{% endif %}
+					{% if group.kana %}
+						<li class="list-group-item list-group-item-danger">{{ group.kana }}</li>
+					{% endif %}
+					{% if group.romaji %}
+						<li class="list-group-item">{{ group.romaji }}</li>
+					{% endif %}
+				</ul>
 		</div>
 	</div>
 </div>

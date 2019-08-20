@@ -1,7 +1,11 @@
 button, h3, h4, h5, h6, p, a {
-		font-family: "Quicksand", sans-serif;
+	font-family: "Quicksand", sans-serif;
 }
 
 h1, h2, #nameBrand {
-		font-family: "Press Start 2P", cursive;
+	font-family: "Press Start 2P", cursive;
+}
+
+.game-label {
+	font-size: 0.6em;
 }
