@@ -14,9 +14,9 @@
 	<div class="d-flex flex-column w-100" id="game-controls">
 		<div class="card mb-auto text-center">
 			<div class="card-body">
-				<h3>0:09</h3>
+				<h3 id="timer"></h3>
 				<button type="button" class="btn btn-dark" data-toggle="modal"
-					data-target="#game-options">Options</button>
+				   data-target="#game-options">{{ _("Options") }}</button>
 			</div>
 			<div class="progress">
 			  <div class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
@@ -28,10 +28,10 @@
 	<div class="d-flex align-items-center w-100" id="game-container">
 		<div class="d-flex flex-column w-100">
 			<ul class="list-group list-group-horizontal-md game-item">
-				<a href="#" class="list-group-item list-group-item-action"><span class="d-block game-label">Subject</span><span id="subject"></span></a>
-				<a href="#" class="list-group-item list-group-item-action"><span class="d-block game-label">Infinitive</span><span id="infinitive"></span></a>
-				<a href="#" class="list-group-item list-group-item-action"><span class="d-block game-label">Mood</span><span id="mood"></span></a>
-				<a href="#" class="list-group-item list-group-item-action"><span class="d-block game-label">Tense</span><span id="tense"></span></a>
+				<a href="#" class="list-group-item list-group-item-action"><span class="d-block game-label">{{ _("Subject") }}</span><span id="subject"></span></a>
+				<a href="#" class="list-group-item list-group-item-action"><span class="d-block game-label">{{ _("Infinitive") }}</span><span id="infinitive"></span></a>
+				<a href="#" class="list-group-item list-group-item-action"><span class="d-block game-label">{{ _("Mood") }}</span><span id="mood"></span></a>
+				<a href="#" class="list-group-item list-group-item-action"><span class="d-block game-label">{{ _("Tense") }}</span><span id="tense"></span></a>
 			</ul>
 			<form id="submission">
 				<div class="input-group mb-3 game-item">
@@ -45,7 +45,7 @@
 				<ul class="list-group text-center answer-list">
 					<li class="list-group-item"><span id="feedback"></span></li>
 					<li class="list-group-item answer"><span id="answer"></span></li>
-					<li class="list-group-item"><a id="translate" target="_new">Google Translate</a></li>
+					<li class="list-group-item"><a id="translate" target="_new">{{ _("Google Translate") }}</a></li>
 					<!-- <li class="list-group-item"><span id="kana"></span></li>-->
 					<!-- <li class="list-group-item"><span id="romaji"></span></li>-->
 				</ul>
@@ -59,35 +59,61 @@
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalCenterTitle">Options</h5>
+				<h5 class="modal-title" id="exampleModalCenterTitle">{{ _("Options") }}</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body">
-				<div class="custom-control custom-switch">
+				<!-- <div class="custom-control custom-switch">
 					<input type="checkbox" class="custom-control-input" id="customSwitch1">
 					<label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
+				</div> -->
+				{% if subjects %}
+					<div class="dropdown">
+						<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Subject
+						</button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							{% for subject in subjects %}
+							<li class="custom-control custom-switch">
+								<input type="checkbox" class="custom-control-input option" id="{{ subject }}">
+								<label class="custom-control-label" for="{{ subject }}">{{ subject }}</label>
+							</li>
+							{% endfor %}
+						</ul>
+					</div>
+				{% endif %}
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Mood
+					</button>
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						{% for mood in moods %}
+						<li class="custom-control custom-switch">
+							<input type="checkbox" class="custom-control-input option" id="{{ mood }}">
+							<label class="custom-control-label" for="{{ mood }}">{{ mood }}</label>
+						</li>
+						{% endfor %}
+					</ul>
 				</div>
 				<div class="dropdown">
 					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Dropdown button
+						Tense
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+						{% for tense in tenses %}
 						<li class="custom-control custom-switch">
-							<input type="checkbox" class="custom-control-input" id="customSwitch2">
-							<label class="custom-control-label" for="customSwitch2">Toggle this switch element</label>
+							<input type="checkbox" class="custom-control-input option" id="{{ tense }}">
+							<label class="custom-control-label" for="{{ tense }}">{{ tense }}</label>
 						</li>
-						<li class="custom-control custom-switch">
-							<input type="checkbox" class="custom-control-input" id="customSwitch3">
-							<label class="custom-control-label" for="customSwitch3">Toggle this switch element</label>
-						</li>
+						{% endfor %}
 					</ul>
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Save changes</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">{{ _("Close") }}</button>
+				<button type="button" class="btn btn-primary">{{ _("Save changes") }}</button>
 			</div>
 		</div>
 	</div>

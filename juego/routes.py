@@ -2,6 +2,7 @@ from juego import app, mongo
 
 from flask import render_template, request
 from flask import jsonify
+from flask_babel import _
 
 @app.route("/")
 def index():
@@ -9,19 +10,38 @@ def index():
 
 @app.route("/en")
 def english():
-    return render_template("game.html")
+
+    subjects = mongo.db.verbs.find({"language": "english"}).distinct("subject")
+    moods = mongo.db.verbs.find({"language": "english"}).distinct("mood")
+    tenses = mongo.db.verbs.find({"language": "english"}).distinct("tense")
+
+    return render_template("game.html", moods=moods, tenses=tenses, subjects=subjects)
 
 @app.route("/es")
 def spanish():
-    return render_template("game.html")
+
+    subjects = mongo.db.verbs.find({"language": "spanish"}).distinct("subject")
+    moods = mongo.db.verbs.find({"language": "spanish"}).distinct("mood")
+    tenses = mongo.db.verbs.find({"language": "spanish"}).distinct("tense")
+
+    return render_template("game.html", moods=moods, tenses=tenses, subjects=subjects)
 
 @app.route("/pt")
 def portuguese():
-    return render_template("game.html")
+
+    subjects = mongo.db.verbs.find({"language": "portuguese"}).distinct("subject")
+    moods = mongo.db.verbs.find({"language": "portuguese"}).distinct("mood")
+    tenses = mongo.db.verbs.find({"language": "portuguese"}).distinct("tense")
+
+    return render_template("game.html", moods=moods, tenses=tenses, subjects=subjects)
 
 @app.route("/jp")
 def japanese():
-    return render_template("game.html")
+
+    moods = mongo.db.verbs.find({"language": "japanese"}).distinct("mood")
+    tenses = mongo.db.verbs.find({"language": "japanese"}).distinct("tense")
+
+    return render_template("game.html", moods=moods, tenses=tenses)
 
 @app.route("/verbs/<language>")
 def verbs(language):

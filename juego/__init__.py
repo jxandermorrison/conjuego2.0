@@ -1,9 +1,15 @@
-from flask import Flask
+from flask import Flask, request
 from flask_pymongo import PyMongo
-from CONFIG import USER, PASSWORD, URL
+from flask_babel import Babel
+from configuration import Config
 
 app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb+srv://{}:{}@{}".format(USER, PASSWORD, URL)
+app.config.from_object(Config)
 mongo = PyMongo(app)
+babel = Babel(app)
+
+@babel.localeselector
+def get_locale():
+    return request.accept_languages.best_match(app.config["LANGUAGES"])
 
 from juego import routes

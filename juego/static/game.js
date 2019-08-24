@@ -1,3 +1,8 @@
+function refreshOptions() {
+	$(".option").each(function() {
+		let id = $(this).attr("id");
+
+
 function refreshPage(language) {
 	$("#guess").val("");
 	$("#guess").prop("disabled", false);
@@ -6,8 +11,8 @@ function refreshPage(language) {
 	$.getJSON(`/verbs/${language}`, function(result) {
 		$("#subject").text(result.subject);
 		$("#infinitive").text(result.infinitive);
-		$("#mood").text(result.en_mood);
-		$("#tense").text(result.en_tense);
+		$("#mood").text(result.mood);
+		$("#tense").text(result.tense);
 
 		$("#answer-box").hide();
 		$("#continue").hide();
@@ -28,9 +33,8 @@ function refreshPage(language) {
 
 $(document).ready(function() {
 	let language;
+	let browser_language = window.navigator.language;
 	let path = window.location.pathname;
-
-	console.log(window.navigator.language);
 
 	if (path === "/en") {
 		language = "english";
