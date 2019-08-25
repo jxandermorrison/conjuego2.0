@@ -1,4 +1,6 @@
 from juego import app, mongo
+import json
+from urllib.parse import unquote
 
 from flask import render_template, request
 from flask import jsonify
@@ -45,10 +47,18 @@ def japanese():
 
 @app.route("/verbs/<language>")
 def verbs(language):
+    options = json.loads(unquote(request.query_string.decode("utf8")))
+
     pipeline = [
-        {"$match": {"language": language}},
+        {"$match": {"$and": [{"language": language}]}},
         {"$sample": {"size": 1}}
     ]
+
+    for option in options:
+        if language == "japanese" and option == "subject":
+            continue
+        pipeline[0]["$match"]["$and"].append({option: {"$in": options[option]}})
+
     group = mongo.db.verbs.aggregate(pipeline).next()
     group["_id"] = str(group["_id"])
     
