@@ -1,8 +1,91 @@
+$.fn.clicktoggle = function(a, b) {
+    return this.each(function() {
+        var clicked = false;
+        $(this).click(function() {
+            if (clicked) {
+                clicked = false;
+                return b.apply(this, arguments);
+            }
+            clicked = true;
+            return a.apply(this, arguments);
+        });
+    });
+};
+
+var timerInterval;
+
 let options = {
 	"subject": [],
 	"mood": [],
 	"tense": []
 };
+
+function setProgress(correct, missed) {
+	console.log(correct, missed);
+	correct = Math.round(correct * 10) / 10;
+	missed = Math.round(missed * 10) / 10;
+	if (correct == 0 && missed == 0) {
+		console.log("here");
+		$("#option-score").text("");
+	} else {
+		console.log("there");
+		$("#option-score").text(correct + "%")
+	}
+	correct = correct.toString();
+	missed = missed.toString();
+	$("#progress-success").css("width", correct + "%");
+	$("#progress-danger").css("width", missed + "%");
+	$("#progress-success").prop("aria-valuenow", correct);
+	$("#progress-danger").prop("aria-valuenow", missed);
+}
+
+function showResultsModal() {
+	let score = $("#option-score").text();
+}
+	
+
+function startTimer(duration) {
+	var start = Date.now(),
+		diff,
+		minutes,
+		seconds;
+
+	function timer() {
+		diff = duration - (((Date.now() - start) / 1000) | 0);
+
+		minutes = (diff / 60) | 0;
+		seconds = (diff % 60) | 0;
+
+		if (minutes == 0 && seconds == 0) {
+			clearInterval(timerInterval);
+		}
+
+		minutes = minutes < 10 ? "0" + minutes : minutes;
+		seconds = seconds < 10 ? "0" + seconds : seconds;
+
+		$("#option-clock").text(minutes + ":" + seconds);
+
+		if (diff <= 0) {
+			start = Date.now() + 1000;
+		}
+	}
+	timer();
+	let timerInterval = setInterval(timer, 1000);
+	return timerInterval;
+}
+
+function addOption(array, item) {
+	if (!(array.includes(item))) {
+		array.push(item);
+	}
+}
+
+function removeOption(array, item) {
+	let index = array.indexOf(item);
+	if (index > -1) {
+		array.splice(index, 1);
+	}
+}
 
 function refreshOptions() {
 	$(".option").each(function() {
@@ -14,39 +97,24 @@ function refreshOptions() {
 		if (localStorage.getItem(id) === "true") {
 			$(this).prop("checked", true);
 			if ($(this).hasClass("subject")) { 
-				if (!(options.subject.includes(target))) {
-					options.subject.push(target);
-				}
+				addOption(options.subject, target);
 			}
 			else if ($(this).hasClass("mood")) {
-				if (!(options.mood.includes(target))) {
-					options.mood.push(target);
-				}
+				addOption(options.mood, target);
 			}
 			else if ($(this).hasClass("tense")) {
-				if (!(options.tense.includes(target))) {
-					options.tense.push(target);
-				}
+				addOption(options.tense, target);
 			}
 		} else {
 			$(this).prop("checked", false);
 			if ($(this).hasClass("subject")) {
-				var index = options.subject.indexOf(target);
-				if (index > -1) {
-					options.subject.splice(index, 1);
-				}
+				removeOption(options.subject, target);
 			}
 			else if ($(this).hasClass("mood")) {
-				var index = options.mood.indexOf(target);
-				if (index > -1) {
-					options.mood.splice(index, 1);
-				}
+				removeOption(options.mood, target);
 			}
 			else if ($(this).hasClass("tense")) {
-				var index = options.tense.indexOf(target);
-				if (index > -1) {
-					options.tense.splice(index, 1);
-				}
+				removeOption(options.tense, target);
 			}
 		}
 	});
@@ -135,11 +203,7 @@ $(document).ready(function() {
 		
 		var right_perc = (right / (right + missed)) * 100
 		var missed_perc = (missed / (right + missed)) * 100
-
-		$("#progress-success").css("width", right_perc.toString() + "%");
-		$("#progress-danger").css("width", missed_perc.toString() + "%");
-		$("#progress-success").prop("aria-valuenow", right_perc.toString());
-		$("#progress-danger").prop("aria-valuenow", missed_perc.toString());
+		setProgress(right_perc, missed_perc);
 	});
 
 	$(document).on("keypress", function(e) {
@@ -156,15 +220,28 @@ $(document).ready(function() {
 		refreshOptions();
 		refreshPage(language, options);
 		$(".modal").modal("hide");
-		$("#progress-success").css("width", "0%");
-		$("#progress-danger").css("width", "0%");
-		$("#progress-success").prop("aria-valuenow", "0");
-		$("#progress-danger").prop("aria-valuenow", "0");
+		setProgress(0, 0);
 	});
 
 	$(".option").change(function() {
 		let id = $(this).attr("id");
 		localStorage[id] = $(this).is(":checked");
 		refreshOptions();
+	});
+
+	$("#start-timer").clicktoggle(function() {
+		let minutes = $("#countdown-minutes").val() * 60;
+		timerInterval = startTimer(minutes);
+		$("#start-timer").text("Stop Timer");
+		$("#countdown-minutes").prop("disabled", true);
+		setProgress(0, 0);
+		right = 0;
+		missed = 0;
+		refreshPage(language, options);
+	}, function () {
+		clearInterval(timerInterval);
+		$("#start-timer").text("Start Timer");
+		$("#countdown-minutes").prop("disabled", false);
+		$("#option-clock").text("");
 	});
 });

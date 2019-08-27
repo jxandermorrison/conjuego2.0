@@ -10,13 +10,37 @@ html, body {
 	padding: 2% 0;
 }
 
-.card-body * {
+.dropdown-menu {
+	padding: 0.5rem;
+}
+
+.form-control {
+	width: 50%;
+}
+
+.option-box {
 	display: inline-block;
-	width: 40%;
+	margin: 15px;
+}
+
+#option-timer {
+	width: 30%;
 }
 
 @media screen and (max-width: 812px) {
 	.list-group-horizontal-md {
 		flex-direction: column;
+	}
+	.option-box {
+		display: block;
+	}
+	.card-body {
+		padding: 0.5rem;
+	}
+	#option-timer {
+		width: 100%;
+	}
+	.option-box {
+		margin: 0.25rem auto;
 	}
 }
