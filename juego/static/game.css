@@ -6,6 +6,13 @@ html, body {
 	height: 80vh;
 }
 
+.clock {
+	border: 2px solid rgba(0,0,0,0.7);
+    padding: 0.5rem;
+    border-radius: 10px;
+    width: 100px;
+}
+
 .game-item, #game-controls {
 	padding: 2% 0;
 }
@@ -25,6 +32,10 @@ html, body {
 
 #option-timer {
 	width: 30%;
+}
+
+#countdown-minutes {
+	width: 60%;
 }
 
 @media screen and (max-width: 812px) {

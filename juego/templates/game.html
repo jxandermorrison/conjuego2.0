@@ -16,7 +16,7 @@
 			<div class="card-body text-center">
 				<div class="option-box" id="option-message"></h5>
 					<h5 class="d-inline-block" id="option-score"></h5>
-					&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;
 					<h5 class="d-inline-block" id="option-clock"></h5>
 				</div>
 				<div class="form-group option-box" id="option-timer">
@@ -32,6 +32,7 @@
 						<option value="9">{{ _("9 Minutes") }}</option>
 						<option value="10">{{ _("10 Minutes") }}</option>
 					</select>
+					&nbsp;
 					<button type="button" class="btn btn-dark d-inline-block" id="start-timer">{{ _("Start Timer") }}</button>
 				</div>
 				<button type="button" id="option-options" class="btn btn-dark option-box" data-toggle="modal"
@@ -129,27 +130,27 @@
 					</ul>
 				</div>
 			</div>
-			<div class="modal" tabindex="-1" role="dialog">
-				<div class="modal-dialog" role="document">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h5 class="modal-title">Modal title</h5>
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="modal-body">
-							<p>Modal body text goes here.</p>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">{{ _("Return to Practice") }}</button>
-							<button type="button" class="btn btn-primary">{{ _("Play Again") }}</button>
-						</div>
-					</div>
-				</div>
-			</div>
 			<div class="modal-footer text-center">
 				<button type="button" class="btn btn-primary" id="save">{{ _("Save changes") }}</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="progress-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Score</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<p id="progress-report"></p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" id="return-to-practice" class="btn btn-secondary" data-dismiss="modal">{{ _("Return to Practice") }}</button>
+				<button type="button" id="play-again" class="btn btn-primary" data-dismiss="modal">{{ _("Play Again") }}</button>
 			</div>
 		</div>
 	</div>

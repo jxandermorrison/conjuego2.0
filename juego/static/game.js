@@ -21,14 +21,11 @@ let options = {
 };
 
 function setProgress(correct, missed) {
-	console.log(correct, missed);
 	correct = Math.round(correct * 10) / 10;
 	missed = Math.round(missed * 10) / 10;
 	if (correct == 0 && missed == 0) {
-		console.log("here");
 		$("#option-score").text("");
 	} else {
-		console.log("there");
 		$("#option-score").text(correct + "%")
 	}
 	correct = correct.toString();
@@ -41,6 +38,8 @@ function setProgress(correct, missed) {
 
 function showResultsModal() {
 	let score = $("#option-score").text();
+	$("#progress-report").text(score);
+	$("#progress-modal").modal("show");
 }
 	
 
@@ -58,6 +57,7 @@ function startTimer(duration) {
 
 		if (minutes == 0 && seconds == 0) {
 			clearInterval(timerInterval);
+			showResultsModal();
 		}
 
 		minutes = minutes < 10 ? "0" + minutes : minutes;
@@ -93,7 +93,10 @@ function refreshOptions() {
 		if (localStorage.getItem(id) === null) {
 			localStorage[id] = true;
 		}
-		var target = $(this).next("label").text().toLowerCase();
+		var target = $(this).next("label").text();
+		if (target !== "I") {
+			target = target.toLowerCase();
+		}
 		if (localStorage.getItem(id) === "true") {
 			$(this).prop("checked", true);
 			if ($(this).hasClass("subject")) { 
@@ -238,10 +241,22 @@ $(document).ready(function() {
 		right = 0;
 		missed = 0;
 		refreshPage(language, options);
+		$("#option-clock").addClass("clock");
 	}, function () {
 		clearInterval(timerInterval);
+		setProgress(0, 0);
 		$("#start-timer").text("Start Timer");
 		$("#countdown-minutes").prop("disabled", false);
 		$("#option-clock").text("");
+		$("#option-clock").removeClass("clock");
+	});
+
+	$("#return-to-practice").click(function() {
+		$("#start-timer").click();
+	});
+
+	$("#play-again").click(function() {
+		$("#start-timer").click();
+		$("#start-timer").click();
 	});
 });
