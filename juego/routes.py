@@ -6,6 +6,8 @@ from flask import render_template, request
 from flask import jsonify
 from flask_babel import _
 
+languages = ["en", "es", "pt"]
+
 @app.route("/")
 def index():
     return render_template("home.html")
@@ -14,40 +16,45 @@ def index():
 def english():
 
     subjects = mongo.db.verbs.find({"language": "english"}).distinct("subject")
-    moods = mongo.db.verbs.find({"language": "english"}).distinct("mood")
-    tenses = mongo.db.verbs.find({"language": "english"}).distinct("tense")
+    lang = request.accept_languages.best_match(languages) or "en"
+    moods = mongo.db.verbs.find({"language": "english"}).distinct(lang + "_mood")
+    tenses = mongo.db.verbs.find({"language": "english"}).distinct(lang + "_tense")
 
-    return render_template("game.html", moods=moods, tenses=tenses, subjects=subjects)
+    return render_template("game.html", moods=moods, tenses=tenses, subjects=subjects, title=_("English"))
 
 @app.route("/es")
 def spanish():
 
     subjects = mongo.db.verbs.find({"language": "spanish"}).distinct("subject")
-    moods = mongo.db.verbs.find({"language": "spanish"}).distinct("mood")
-    tenses = mongo.db.verbs.find({"language": "spanish"}).distinct("tense")
+    lang = request.accept_languages.best_match(languages) or "en"
+    moods = mongo.db.verbs.find({"language": "spanish"}).distinct(lang + "_mood")
+    tenses = mongo.db.verbs.find({"language": "spanish"}).distinct(lang + "_tense")
 
-    return render_template("game.html", moods=moods, tenses=tenses, subjects=subjects)
+    return render_template("game.html", moods=moods, tenses=tenses, subjects=subjects, title=_("Spanish"))
 
 @app.route("/pt")
 def portuguese():
 
     subjects = mongo.db.verbs.find({"language": "portuguese"}).distinct("subject")
-    moods = mongo.db.verbs.find({"language": "portuguese"}).distinct("mood")
-    tenses = mongo.db.verbs.find({"language": "portuguese"}).distinct("tense")
+    lang = request.accept_languages.best_match(languages) or "en"
+    moods = mongo.db.verbs.find({"language": "portuguese"}).distinct(lang + "_mood")
+    tenses = mongo.db.verbs.find({"language": "portuguese"}).distinct(lang + "_tense")
 
-    return render_template("game.html", moods=moods, tenses=tenses, subjects=subjects)
+    return render_template("game.html", moods=moods, tenses=tenses, subjects=subjects, title=_("Portuguese"))
 
 @app.route("/jp")
 def japanese():
 
-    moods = mongo.db.verbs.find({"language": "japanese"}).distinct("mood")
-    tenses = mongo.db.verbs.find({"language": "japanese"}).distinct("tense")
+    lang = request.accept_languages.best_match(languages) or "en"
+    moods = mongo.db.verbs.find({"language": "japanese"}).distinct(lang + "_mood")
+    tenses = mongo.db.verbs.find({"language": "japanese"}).distinct(lang + "_tense")
 
-    return render_template("game.html", moods=moods, tenses=tenses)
+    return render_template("game.html", moods=moods, tenses=tenses, title=_("Japanese"))
 
 @app.route("/verbs/<language>")
 def verbs(language):
     options = json.loads(unquote(request.query_string.decode("utf8")))
+    lang = request.accept_languages.best_match(languages) or "en"
 
     pipeline = [
         {"$match": {"$and": [{"language": language}]}},
@@ -57,9 +64,16 @@ def verbs(language):
     for option in options:
         if language == "japanese" and option == "subject":
             continue
-        pipeline[0]["$match"]["$and"].append({option: {"$in": options[option]}})
+        if option in ["mood", "tense"]:
+            mod_option = "{}_{}".format(lang, option)
+            pipeline[0]["$match"]["$and"].append({mod_option: {"$in": options[option]}})
+        else:
+            pipeline[0]["$match"]["$and"].append({option: {"$in": options[option]}})
+
+    print(pipeline)
 
     group = mongo.db.verbs.aggregate(pipeline).next()
     group["_id"] = str(group["_id"])
+    group["browser_language"] = lang
     
     return jsonify(group)

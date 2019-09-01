@@ -91,7 +91,7 @@
 				{% if subjects %}
 					<div class="dropdown d-inline-block">
 						<button class="btn btn-secondary dropdown-toggle mt-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Subject
+							{{ _("Subject") }}
 						</button>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 							{% for subject in subjects %}
@@ -105,7 +105,7 @@
 				{% endif %}
 				<div class="dropdown d-inline-block">
 					<button class="btn btn-secondary dropdown-toggle mt-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Mood
+						{{ _("Mood") }}
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						{% for mood in moods %}
@@ -118,7 +118,7 @@
 				</div>
 				<div class="dropdown d-inline-block">
 					<button class="btn btn-secondary dropdown-toggle mt-1" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Tense
+						{{ _("Tense") }}
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 						{% for tense in tenses %}
@@ -140,13 +140,13 @@
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Score</h5>
+				<h5 class="modal-title" id="exampleModalLabel">{{ _("Score") }}</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<div class="modal-body">
-				<p id="progress-report"></p>
+			<div class="modal-body text-center">
+				<h5 id="progress-report"></h5>
 			</div>
 			<div class="modal-footer">
 				<button type="button" id="return-to-practice" class="btn btn-secondary" data-dismiss="modal">{{ _("Return to Practice") }}</button>

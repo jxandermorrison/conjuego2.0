@@ -130,10 +130,24 @@ function refreshPage(language, options) {
 	$("#submit").prop("disabled", false)
 
 	$.getJSON(`/verbs/${language}`, encodeURIComponent(JSON.stringify(options)), function(result) {
+		let target_mood, target_tense;
+		if (result.browser_language == "pt") {
+			console.log(result.browser_language);
+			target_mood = "pt_mood";
+			target_tense = "pt_tense";
+		} else if (result.browser_language == "es") {
+			console.log(result.browser_language);
+			target_mood = "es_mood";
+			target_tense = "es_tense";
+		} else {
+			console.log(result.browser_language);
+			target_mood = "en_mood";
+			target_tense = "en_tense";
+		}
 		$("#subject").text(result.subject);
 		$("#infinitive").text(result.infinitive);
-		$("#mood").text(result.mood);
-		$("#tense").text(result.tense);
+		$("#mood").text(result[target_mood]);
+		$("#tense").text(result[target_tense]);
 
 		$("#answer-box").hide();
 		$("#continue").hide();
@@ -227,6 +241,17 @@ $(document).ready(function() {
 	});
 
 	$(".option").change(function() {
+		if ($("input.subject")[0]) {
+			if ($("input.subject:checked").length === 0) {
+				$(this).prop("checked", true);
+			}
+		}
+		if ($("input.mood:checked").length === 0) {
+			$(this).prop("checked", true);
+		}
+		if ($("input.tense:checked").length === 0) {
+			$(this).prop("checked", true);
+		}
 		let id = $(this).attr("id");
 		localStorage[id] = $(this).is(":checked");
 		refreshOptions();
