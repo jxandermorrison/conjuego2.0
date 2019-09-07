@@ -1,0 +1,116 @@
+# Spanish translations for PROJECT.
+# Copyright (C) 2019 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2019-09-06 13:21-0500\n"
+"PO-Revision-Date: 2019-09-06 13:31-0500\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: es\n"
+"Language-Team: es <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.7.0\n"
+
+#: juego/templates/game.html:24
+msgid "1 Minute"
+msgstr "1 Minuto"
+
+#: juego/templates/game.html:25
+msgid "2 Minutes"
+msgstr "2 Minutos"
+
+#: juego/templates/game.html:26
+msgid "3 Minutes"
+msgstr "3 Minutos"
+
+#: juego/templates/game.html:27
+msgid "4 Minutes"
+msgstr "4 Minutos"
+
+#: juego/templates/game.html:28
+msgid "5 Minutes"
+msgstr "5 Minutos"
+
+#: juego/templates/game.html:29
+msgid "6 Minutes"
+msgstr "6 Minutos"
+
+#: juego/templates/game.html:30
+msgid "7 Minutes"
+msgstr "7 Minutos"
+
+#: juego/templates/game.html:31
+msgid "8 Minutes"
+msgstr "8 Minutos"
+
+#: juego/templates/game.html:32
+msgid "9 Minutes"
+msgstr "9 Minutos"
+
+#: juego/templates/game.html:33
+msgid "10 Minutes"
+msgstr "10 Minutos"
+
+#: juego/templates/game.html:36
+msgid "Start Timer"
+msgstr "Iniciar"
+
+#: juego/templates/game.html:39 juego/templates/game.html:81
+msgid "Options"
+msgstr "Opciones"
+
+#: juego/templates/game.html:50 juego/templates/game.html:94
+msgid "Subject"
+msgstr "Sujeto"
+
+#: juego/templates/game.html:51
+msgid "Infinitive"
+msgstr "Infinitivo"
+
+#: juego/templates/game.html:52 juego/templates/game.html:108
+msgid "Mood"
+msgstr "Aspecto"
+
+#: juego/templates/game.html:53 juego/templates/game.html:121
+msgid "Tense"
+msgstr "Tenso"
+
+#: juego/templates/game.html:59
+msgid "Submit"
+msgstr "Enviar"
+
+#: juego/templates/game.html:67
+msgid "Google Translate"
+msgstr "Google Traducción"
+
+#: juego/templates/game.html:134
+msgid "Save changes"
+msgstr "Guardar Cambios"
+
+#: juego/templates/game.html:143
+msgid "Score"
+msgstr "Puntaje"
+
+#: juego/templates/game.html:152
+msgid "Return to Practice"
+msgstr "Volver a la Práctica"
+
+#: juego/templates/game.html:153
+msgid "Play Again"
+msgstr "Jugar De Nuevo"
+
+#: juego/templates/home.html:7
+msgid "Welcome to Conjuego"
+msgstr "Bienvenido a Conjuego"
+
+#: juego/templates/home.html:8
+msgid "Practice verb conjugations"
+msgstr "Practica las conjugaciones verbales"
+

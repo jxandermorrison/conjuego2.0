@@ -132,15 +132,12 @@ function refreshPage(language, options) {
 	$.getJSON(`/verbs/${language}`, encodeURIComponent(JSON.stringify(options)), function(result) {
 		let target_mood, target_tense;
 		if (result.browser_language == "pt") {
-			console.log(result.browser_language);
 			target_mood = "pt_mood";
 			target_tense = "pt_tense";
 		} else if (result.browser_language == "es") {
-			console.log(result.browser_language);
 			target_mood = "es_mood";
 			target_tense = "es_tense";
 		} else {
-			console.log(result.browser_language);
 			target_mood = "en_mood";
 			target_tense = "en_tense";
 		}
@@ -168,7 +165,7 @@ function refreshPage(language, options) {
 
 $(document).ready(function() {
 	let language;
-	let browser_language = window.navigator.language;
+	let browser_language = window.navigator.language.substring(0,2);
 	let path = window.location.pathname;
 
 	let right = 0;
@@ -185,6 +182,8 @@ $(document).ready(function() {
 	} else if (path === "/jp") {
 		language = "japanese";
 	}
+
+	console.log(browser_language);
 
 	refreshPage(language, options);
 
@@ -260,7 +259,12 @@ $(document).ready(function() {
 	$("#start-timer").clicktoggle(function() {
 		let minutes = $("#countdown-minutes").val() * 60;
 		timerInterval = startTimer(minutes);
-		$("#start-timer").text("Stop Timer");
+		if (browser_language === "es")
+			$("#start-timer").text("Detener");
+		else if (browser_language === "pt")
+			$("#start-timer").text("Parar");
+		else
+			$("#start-timer").text("Stop Timer");
 		$("#countdown-minutes").prop("disabled", true);
 		setProgress(0, 0);
 		right = 0;
@@ -270,7 +274,10 @@ $(document).ready(function() {
 	}, function () {
 		clearInterval(timerInterval);
 		setProgress(0, 0);
-		$("#start-timer").text("Start Timer");
+		if (browser_language === "es" || browser_language === "pt")
+			$("#start-timer").text("Iniciar");
+		else
+			$("#start-timer").text("Start Timer");
 		$("#countdown-minutes").prop("disabled", false);
 		$("#option-clock").text("");
 		$("#option-clock").removeClass("clock");

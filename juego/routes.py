@@ -70,8 +70,6 @@ def verbs(language):
         else:
             pipeline[0]["$match"]["$and"].append({option: {"$in": options[option]}})
 
-    print(pipeline)
-
     group = mongo.db.verbs.aggregate(pipeline).next()
     group["_id"] = str(group["_id"])
     group["browser_language"] = lang

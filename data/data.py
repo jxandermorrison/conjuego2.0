@@ -26,6 +26,10 @@ full.loc[(full["en_mood"] == "subjunctive") & (full["en_tense"] == "imperfect (s
 full.loc[(full["en_mood"] == "subjunctive") & (full["en_tense"] == "imperfect (ra)"), "pt_tense"] = "imperfeito (ra)"
 full.loc[(full["en_mood"] == "subjunctive") & (full["en_tense"] == "imperfect (se)"), "pt_tense"] = "imperfeito (se)"
 
+
+
+full.loc[(full["en_mood"] == "imperative") & (full["en_tense"] == "negative") & (full["language"] == "portuguese"), "answer"] = "no " + full.loc[(full["en_mood"] == "imperative") & (full["en_tense"] == "negative") & (full["language"] == "portuguese"), "answer"]
+
 full = full.fillna("")
 
 data = full.to_dict(orient="records")
