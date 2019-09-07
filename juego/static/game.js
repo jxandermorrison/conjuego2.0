@@ -130,6 +130,10 @@ function refreshPage(language, options) {
 	$("#submit").prop("disabled", false)
 
 	$.getJSON(`/verbs/${language}`, encodeURIComponent(JSON.stringify(options)), function(result) {
+		if (result.language === "None") {
+			$("#error-msg").fadeIn();
+			$("#error-msg").delay(2500).fadeOut();
+		}
 		let target_mood, target_tense;
 		if (result.browser_language == "pt") {
 			target_mood = "pt_mood";
@@ -149,7 +153,7 @@ function refreshPage(language, options) {
 		$("#answer-box").hide();
 		$("#continue").hide();
 
-		if (language === "english")
+		if (language === "english" && result[target_mood] !== "imperative" && result[target_mood] !== "imperativo")
 			$("#answer").text(`${result.subject} ${result.answer}`);
 		else
 			$("#answer").text(result.answer);
@@ -182,8 +186,6 @@ $(document).ready(function() {
 	} else if (path === "/jp") {
 		language = "japanese";
 	}
-
-	console.log(browser_language);
 
 	refreshPage(language, options);
 

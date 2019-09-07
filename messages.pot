@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-09-06 13:21-0500\n"
+"POT-Creation-Date: 2019-09-07 14:37-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,50 +58,54 @@ msgid "10 Minutes"
 msgstr ""
 
 #: juego/templates/game.html:36
-msgid "Start Timer"
+msgid "Start"
 msgstr ""
 
-#: juego/templates/game.html:39 juego/templates/game.html:81
+#: juego/templates/game.html:39 juego/templates/game.html:82
 msgid "Options"
 msgstr ""
 
-#: juego/templates/game.html:50 juego/templates/game.html:94
+#: juego/templates/game.html:49
+msgid "Error: Your option settings do not produce results"
+msgstr ""
+
+#: juego/templates/game.html:51 juego/templates/game.html:95
 msgid "Subject"
 msgstr ""
 
-#: juego/templates/game.html:51
+#: juego/templates/game.html:52
 msgid "Infinitive"
 msgstr ""
 
-#: juego/templates/game.html:52 juego/templates/game.html:108
+#: juego/templates/game.html:53 juego/templates/game.html:109
 msgid "Mood"
 msgstr ""
 
-#: juego/templates/game.html:53 juego/templates/game.html:121
+#: juego/templates/game.html:54 juego/templates/game.html:122
 msgid "Tense"
 msgstr ""
 
-#: juego/templates/game.html:59
+#: juego/templates/game.html:60
 msgid "Submit"
 msgstr ""
 
-#: juego/templates/game.html:67
+#: juego/templates/game.html:68
 msgid "Google Translate"
 msgstr ""
 
-#: juego/templates/game.html:134
+#: juego/templates/game.html:135
 msgid "Save changes"
 msgstr ""
 
-#: juego/templates/game.html:143
+#: juego/templates/game.html:144
 msgid "Score"
 msgstr ""
 
-#: juego/templates/game.html:152
+#: juego/templates/game.html:153
 msgid "Return to Practice"
 msgstr ""
 
-#: juego/templates/game.html:153
+#: juego/templates/game.html:154
 msgid "Play Again"
 msgstr ""
 
